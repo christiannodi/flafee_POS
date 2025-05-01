@@ -8,6 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_slide_to_act/gradient_slide_to_act.dart';
+import 'package:intl/intl.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -37,6 +38,12 @@ class _DashboardState extends State<Dashboard> {
   String selectedOrderType = "Dine In";
   TextEditingController searchController = TextEditingController();
   String searchQuery = '';
+
+  String getToday() {
+    final now = DateTime.now();
+    final formatter = DateFormat('EEEE, d MMMM');
+    return formatter.format(now);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -260,11 +267,11 @@ class _DashboardState extends State<Dashboard> {
                           // Tambahkan ke keranjang
                         },
                         child: Container(
-                          height: heightScreen * 0.05,
-                          width: heightScreen * 0.05,
+                          height: widthScreen * 0.03,
+                          width: widthScreen * 0.03,
                           decoration: BoxDecoration(
                             borderRadius:
-                                BorderRadius.circular(heightScreen * 0.05),
+                                BorderRadius.circular(widthScreen * 0.03),
                             color: AppPallete.main,
                           ),
                           child: Icon(
@@ -489,65 +496,120 @@ class _DashboardState extends State<Dashboard> {
     return Padding(
       padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           TxtCustom(
               tittle: "Flaafee",
-              color: AppPallete.main,
+              color: AppPallete.black,
               fontSize: 48,
               fontWeight: FontWeight.w800),
-          Row(
-            children: [
-              Container(
-                width: 50,
-                height: 50,
-                decoration: BoxDecoration(
-                    color: AppPallete.white,
-                    borderRadius: BorderRadius.circular(25)),
-                child: const Icon(
-                  Icons.notifications,
-                  color: AppPallete.black,
+          Gap(15),
+          Container(
+              padding: EdgeInsets.only(left: 15, right: 15),
+              height: 40,
+              decoration: BoxDecoration(
+                  color: AppPallete.white,
+                  borderRadius: BorderRadius.circular(25)),
+              child: Center(
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      "assets/svg/calendar.svg",
+                      height: 18,
+                      color: AppPallete.main,
+                    ),
+                    Gap(5),
+                    TxtCustom(
+                        tittle: getToday(),
+                        fontSize: 14,
+                        color: AppPallete.main,
+                        fontWeight: FontWeight.bold),
+                  ],
                 ),
+              )),
+          Spacer(),
+          TxtCustom(
+              tittle: "Orders: 20",
+              fontSize: 14,
+              color: AppPallete.black,
+              fontWeight: FontWeight.bold),
+          InkWell(
+            onTap: () {
+              // Navigate to notification page
+            },
+            child: Container(
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(25)),
+              child: Row(
+                children: [
+                  SvgPicture.asset(
+                    "assets/svg/report.svg",
+                    height: 20,
+                    color: AppPallete.black,
+                  ),
+                  Gap(5),
+                  TxtCustom(
+                      tittle: "Report",
+                      fontSize: 14,
+                      color: AppPallete.black,
+                      fontWeight: FontWeight.bold),
+                ],
               ),
-              Gap(15),
-              Container(
-                  height: 50,
-                  decoration: BoxDecoration(
-                      color: AppPallete.white,
-                      borderRadius: BorderRadius.circular(25)),
-                  child: Row(
-                    children: [
-                      Gap(5),
-                      Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                              color: AppPallete.black,
-                              borderRadius: BorderRadius.circular(20)),
-                          child: const Icon(
-                            Icons.person,
-                          )),
-                      Gap(5),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          TxtCustom(
-                              tittle: "Susi Semilikiti",
-                              fontSize: 16,
-                              color: AppPallete.main,
-                              fontWeight: FontWeight.bold),
-                          TxtCustom(
-                              tittle: "Cashier",
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600),
-                        ],
-                      ),
-                      Gap(20),
-                    ],
-                  )),
-            ],
+            ),
           ),
+          Gap(10),
+          Container(
+            padding: EdgeInsets.all(16),
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+                color: AppPallete.white,
+                borderRadius: BorderRadius.circular(25)),
+            child: SvgPicture.asset(
+              "assets/svg/notification.svg",
+              fit: BoxFit.fitWidth,
+              color: AppPallete.main,
+            ),
+          ),
+          Gap(15),
+          Container(
+              height: 50,
+              decoration: BoxDecoration(
+                  color: AppPallete.white,
+                  borderRadius: BorderRadius.circular(25)),
+              child: Row(
+                children: [
+                  Gap(5),
+                  Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                          color: AppPallete.black,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: const Icon(
+                        Icons.person,
+                      )),
+                  Gap(5),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TxtCustom(
+                          tittle: "Susi Semilikiti",
+                          fontSize: 16,
+                          color: AppPallete.main,
+                          fontWeight: FontWeight.bold),
+                      TxtCustom(
+                          tittle: "Cashier",
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600),
+                    ],
+                  ),
+                  Gap(20),
+                ],
+              )),
         ],
       ),
     );

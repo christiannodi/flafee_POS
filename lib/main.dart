@@ -1,5 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flafee/screen/dashboard.dart';
+import 'package:flafee/screen/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flafee Coffee',
       debugShowCheckedModeBanner: false,
-      home: Dashboard(),
+      home: LoginPage(),
     );
   }
 }
