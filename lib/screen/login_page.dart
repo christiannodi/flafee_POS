@@ -25,62 +25,84 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       backgroundColor: AppPallete.background,
-      body: Center(
-        child: Container(
-          height: heightScreen * 0.6,
-          width: widthScreen * 0.45,
+      body: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(50), color: AppPallete.white),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TxtCustom(
-                  tittle: "Flaafee",
-                  color: AppPallete.main,
+            image: DecorationImage(
+              image: const AssetImage("assets/png/background.png"),
+              fit: BoxFit.cover,
+              // colorFilter: ColorFilter.mode(
+              //     AppPallete.background.withOpacity(0.5), BlendMode.dstATop),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2), // Warna shadow
+                spreadRadius: 2, // Seberapa jauh shadow menyebar
+                blurRadius: 7, // Seberapa blur shadow
+                offset: Offset(0, 3), // Posisi shadow (x, y)
+              ),
+            ],
+          ),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                TxtCustom(
+                  tittle: "Flafee",
                   fontSize: 48,
-                  fontWeight: FontWeight.w800),
-              TxtCustom(
-                tittle: "Your Coffee Stop",
-                alignment: TextAlign.start,
-                fontWeight: FontWeight.w700,
-              ),
-              Gap(50),
-              SizedBox(
-                  width: widthScreen * 0.3,
-                  child: InputForm(
-                      tittle: "Username", hinttext: "Enter your username")),
-              Gap(20),
-              SizedBox(
-                width: widthScreen * 0.3,
-                child: InputForm(
-                  tittle: "Password",
-                  hinttext: "Enter your password",
-                  obscure: true,
+                  color: AppPallete.black,
+                  fontWeight: FontWeight.w900,
                 ),
-              ),
-              Gap(30),
-              SizedBox(
-                width: widthScreen * 0.3,
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: ButtonWidget(
-                      tittle: "Login",
+                TxtCustom(
+                    tittle: "Welcome Back, Please Login ",
+                    fontSize: 14,
+                    color: AppPallete.black,
+                    fontWeight: FontWeight.bold),
+                Gap(20),
+                Container(
+                  width: 350,
+                  padding: const EdgeInsets.all(30),
+                  decoration: BoxDecoration(
+                    color: AppPallete.mainsubsub,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.5), // Warna shadow
+                        spreadRadius: 1, // Seberapa jauh shadow menyebar
+                        blurRadius: 5, // Seberapa blur shadow
+                        offset: Offset(10, 10), // Posisi shadow (x, y)
+                      ),
+                    ],
+                  ),
+                  child: Column(children: [
+                    InputFormLogin(
+                      tittle: "Username",
+                      hinttext: "Write your username",
+                    ),
+                    Gap(10),
+                    InputFormLogin(
+                      tittle: "Password",
+                      hinttext: "Write your password",
+                      obscure: true,
+                    ),
+                    Gap(10),
+                    ButtonWidget(
+                      tittle: "Sign In",
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const Dashboard(),
-                            ));
+                                builder: (context) => const Dashboard()));
                       },
-                      height: 50,
+                      color: AppPallete.main,
                       width: 170,
-                      color: AppPallete.main),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+                      height: 42,
+                    ),
+                  ]),
+                )
+              ],
+            ),
+          )),
     );
   }
 }

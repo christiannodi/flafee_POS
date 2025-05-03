@@ -27,12 +27,12 @@ class ButtonWidget extends StatelessWidget {
         height: height,
         width: width,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(height),
+          borderRadius: BorderRadius.circular(15),
           color: color,
         ),
         child: InkWell(
           splashColor: AppPallete.mainsub,
-          borderRadius: BorderRadius.circular(height),
+          borderRadius: BorderRadius.circular(15),
           onTap: onTap,
           child: Center(
             child: Text(
