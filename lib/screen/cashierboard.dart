@@ -40,6 +40,28 @@ class _CashierBoardState extends State<CashierBoard> {
   TextEditingController searchController = TextEditingController();
   String searchQuery = '';
 
+  @override
+  void initState() {
+    super.initState();
+    // Kunci orientasi ke landscape saat inisialisasi
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
+  }
+
+  @override
+  void dispose() {
+    // Mengembalikan orientasi ke default saat widget ini dibuang
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
+    super.dispose();
+  }
+
   String getToday() {
     final now = DateTime.now();
     final formatter = DateFormat('EEEE, d MMMM');
@@ -50,19 +72,36 @@ class _CashierBoardState extends State<CashierBoard> {
   Widget build(BuildContext context) {
     heightScreen = MediaQuery.of(context).size.height;
     widthScreen = MediaQuery.of(context).size.width;
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.landscapeLeft,
-    ]);
+    final orientation = MediaQuery.of(context).orientation;
 
     if (widthScreen < 600) {
       return Scaffold(
         backgroundColor: AppPallete.background,
         body: Center(
           child: TxtCustom(
-            tittle: "This CashierBoard is not available on mobile",
-            fontSize: 12,
+            tittle: "CashierBoard is not available on mobile",
+            fontSize: 16,
             fontWeight: FontWeight.w700,
+          ),
+        ),
+      );
+    }
+
+    if (orientation == Orientation.portrait) {
+      return Scaffold(
+        backgroundColor: AppPallete.background,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.screen_rotation, size: 50),
+              const SizedBox(height: 20),
+              TxtCustom(
+                tittle: "Please rotate your device to landscape",
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ],
           ),
         ),
       );
