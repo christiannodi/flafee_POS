@@ -1,9 +1,10 @@
-import 'package:flafee/screen/dashboard.dart';
+import 'package:flafee/screen/cashierboard.dart';
 import 'package:flafee/theme.dart';
 import 'package:flafee/widget/button_widget.dart';
 import 'package:flafee/widget/widget_form.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 import '../widget/widget_text.dart';
 
@@ -89,10 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                     ButtonWidget(
                       tittle: "Sign In",
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Dashboard()));
+                        Get.toNamed('/cashierboard');
                       },
                       color: AppPallete.main,
                       width: 170,

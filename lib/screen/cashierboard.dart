@@ -4,20 +4,21 @@ import 'package:flafee/theme.dart';
 import 'package:flafee/widget/widget_form.dart';
 import 'package:flafee/widget/widget_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gradient_slide_to_act/gradient_slide_to_act.dart';
 import 'package:intl/intl.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+class CashierBoard extends StatefulWidget {
+  const CashierBoard({super.key});
 
   @override
-  State<Dashboard> createState() => _DashboardState();
+  State<CashierBoard> createState() => _CashierBoardState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _CashierBoardState extends State<CashierBoard> {
   int _counter = 1;
 
   void _increment() {
@@ -49,6 +50,23 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     heightScreen = MediaQuery.of(context).size.height;
     widthScreen = MediaQuery.of(context).size.width;
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
+
+    if (widthScreen < 600) {
+      return Scaffold(
+        backgroundColor: AppPallete.background,
+        body: Center(
+          child: TxtCustom(
+            tittle: "This CashierBoard is not available on mobile",
+            fontSize: 12,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      );
+    }
 
     return Scaffold(
         resizeToAvoidBottomInset: true,

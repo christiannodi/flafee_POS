@@ -1,7 +1,9 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:flafee/screen/dashboard.dart';
-import 'package:flafee/screen/login_page.dart';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'routes/app_pages.dart';
 
 void main() {
   runApp(DevicePreview(
@@ -16,10 +18,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flafee Coffee',
-      debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      initialRoute:
+          AppPages.initial, // Menentukan route pertama kali yang akan dipanggil
+      getPages: AppPages.routes,
+      // Menambahkan semua route yang sudah dideklarasikan
     );
   }
 }
