@@ -1,7 +1,7 @@
 import 'package:flafee/screen/cashierboard.dart';
+import 'package:flafee/screen/dashboard.dart';
 import 'package:flafee/screen/login_page.dart';
 import 'package:get/get.dart';
-import 'package:flutter/material.dart';
 
 class AppPages {
   static const initial = Routes.login;
@@ -17,10 +17,16 @@ class AppPages {
       page: () => CashierBoard(),
       // binding: DetailsBinding(), // Optional: untuk menghubungkan dengan controller (if any)
     ),
+    GetPage(
+      name: Routes.dashboard,
+      page: () => Dashboard(),
+      // binding: DetailsBinding(), // Optional: untuk menghubungkan dengan controller (if any)
+    ),
   ];
 }
 
 class Routes {
   static const login = '/';
   static const cashier = '/cashierboard';
+  static const dashboard = '/dashboard';
 }

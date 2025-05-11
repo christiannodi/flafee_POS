@@ -18,6 +18,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late double heightScreen;
   late double widthScreen;
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -77,11 +79,13 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   child: Column(children: [
                     InputFormLogin(
+                      controller: usernameController,
                       tittle: "Username",
                       hinttext: "Write your username",
                     ),
                     Gap(10),
                     InputFormLogin(
+                      controller: passwordController,
                       tittle: "Password",
                       hinttext: "Write your password",
                       obscure: true,
@@ -90,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                     ButtonWidget(
                       tittle: "Sign In",
                       onTap: () {
-                        Get.toNamed('/cashierboard');
+                        _login();
                       },
                       color: AppPallete.main,
                       width: 170,
@@ -102,5 +106,28 @@ class _LoginPageState extends State<LoginPage> {
             ),
           )),
     );
+  }
+
+  void _login() {
+    // Ambil username dan password yang dimasukkan
+    String username = usernameController.text.trim();
+    String password = passwordController.text.trim();
+
+    // Logika pengecekan username dan password
+    if (username == "admin") {
+      // Jika admin, arahkan ke halaman cashierboard
+      Get.toNamed('/cashierboard');
+    } else if (username == "owner") {
+      // Jika owner, arahkan ke halaman dashboard
+      Get.toNamed('/dashboard');
+    } else {
+      // Jika login gagal
+      Get.snackbar(
+        "Login Failed",
+        "Invalid username or password.",
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+    }
   }
 }
